@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<style>
+
+
+</style>
+</head>
+
+<body> 
+<div id= 'bkgd' style="position:absolute;width:100vw; height: 100vh;">
+<img src="./picture/tree.jpg" style = "width:100vw; height:99.6vh;">
+<img src="./picture/star.png" style = "position:absolute; top:5.4vh;left:46.5vw;width:8vw; height:13vh;">
+<img src="./picture/a.png" style = "position:absolute; top:48vh;left:1vw;width:8vw; height:13vh;">
+<img src="./picture/gift.png" style = "position:absolute; top:68vh;left:50vw;width:30vw; height:40vh;">
+<img src="./picture/flower.png" style = "position:absolute; top:10vh;left:65vw;width:20vw; height:25vh;">
+</div>
+<button id='power'style = "position:absolute;width:3vw; height: 3vh;left: 40vw;top:5vh;">
+Power
+</button>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script>
+var powerOn = false;
+
+$('#power').click (function() {
+  powerOn = !powerOn;
+  
+  if (powerOn === true) {  // false--> true
+     lamps.forEach (function(item) {item.startBlink();});
+  }
+});
+
+class Lamp {
+
+  constructor(pos,name) {
+    this.name = name + Lamp.id++;
+    this.myStatus = false;
+    
+    let el = document.createElement ('div');
+    el.id = this.name;
+    let bkgd = document.getElementById('bkgd');
+    bkgd.appendChild(el);
+    this.hue = Math.random()*360;
+
+    // styles
+    el.setAttribute ("style",`background-color: hsl(${this.hue}, 90%, 24%); width:4vh;height:4vh;border-radius:50%;`);
+    this.left = pos[0];
+    this.top = pos[1];
+    el.style.position = "absolute";
+    el.style.left = this.left*100 + '%'; 
+    el.style.top = this.top*100 + '%';
+  }
+
+  toggle() {
+    if (powerOn) {
+	   this.myStatus = ! this.myStatus;
+	   var that=this;
+       setTimeout (()=>{this.toggle();},Math.floor(Math.random() * 1000 + 1000));
+    }
+	else
+	{
+	this.myStatus = true;
+	var that=this;
+	setTimeout($('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,24%)`), 100)
+	}
+    
+    if (this.myStatus === true) {
+      $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,24%)`);
+    } else {
+      $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,80%)`);
+    }
+  }
+
+  startBlink() {
+    var that = this;
+/*   
+    setInterval(function() {
+      that.toggle();
+    }, 500);
+*/
+   setTimeout (()=>{ this.toggle();}, Math.floor(Math.random() * 1000 + 1000));
+     
+    //setInterval (that.toggle, 500);   // somehow, it does not work
+  }
+}
+
+
+Lamp.id = 0; // class variable
+lamps = [];
+
+
+   let ll = new Lamp ([0.495,0.25],'light1');
+   lamps.push (ll);
+   ll = new Lamp ([0.46,0.225],'light2');
+   lamps.push (ll);
+   ll = new Lamp ([0.53,0.225],'light3');
+   lamps.push (ll);
+   ll = new Lamp ([0.5,0.35],'light4');
+   lamps.push (ll);
+   ll = new Lamp ([0.55,0.33],'light5');
+   lamps.push (ll);
+   ll = new Lamp ([0.45,0.33],'light6');
+   lamps.push (ll);
+   ll = new Lamp ([0.48,0.45],'light7');
+   lamps.push (ll);
+   ll = new Lamp ([0.43,0.425],'light8');
+   lamps.push (ll);
+   ll = new Lamp ([0.53,0.45],'light9');
+   lamps.push (ll);
+   ll = new Lamp ([0.58,0.425],'light10');
+   lamps.push (ll);
+   ll = new Lamp ([0.6,0.55],'light11');
+   lamps.push (ll);
+   ll = new Lamp ([0.55,0.57],'light12');
+   lamps.push (ll);
+   ll = new Lamp ([0.45,0.57],'light13');
+   lamps.push (ll);
+   ll = new Lamp ([0.40,0.55],'light14');
+   lamps.push (ll);
+   ll = new Lamp ([0.5,0.58],'light15');
+   lamps.push (ll);
+   ll = new Lamp ([0.37,0.65],'light16');
+   lamps.push (ll);
+   ll = new Lamp ([0.43,0.68],'light17');
+   lamps.push (ll);
+   ll = new Lamp ([0.5,0.7],'light18');
+   lamps.push (ll);
+   ll = new Lamp ([0.56,0.68],'light19');
+   lamps.push (ll);
+   ll = new Lamp ([0.61,0.65],'light20');
+   lamps.push (ll);
+   ll = new Lamp ([0.5,0.8],'light21');
+   lamps.push (ll);
+   ll = new Lamp ([0.43,0.78],'light22');
+   lamps.push (ll);
+   ll = new Lamp ([0.36,0.75],'light23');
+   lamps.push (ll);
+   ll = new Lamp ([0.57,0.78],'light24');
+   lamps.push (ll);
+   ll = new Lamp ([0.63,0.73],'light25');
+   lamps.push (ll);
+
+
+lamps.forEach ( function(ll) {ll.startBlink();} );
+
+</script>
+</body>
+
+</html>

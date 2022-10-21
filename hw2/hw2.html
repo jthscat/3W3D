@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<style>
+table{
+  border: 2px ridge black;
+  border-color: red;
+  background-color: #b5b4ae;
+  border-radius: 15px;
+  text-align:center;
+}
+td,th{
+  font-size:40px;
+}
+input{
+	width:80%;
+	height:50%;
+}
+#output{
+  border: 1px black solid; background-color:white; width:70%;
+}
+</style>
+<body>
+<div style = "position : absolute; width: 1000px;height:1000px; background-color:#BBFFBB">
+<table style = "border-color:#D0D0D0;border-width: 2px; position : absolute; left:10%; top: 15%; width:30%; height:25%; background-color:#FFFFB9">
+  <tr>
+    <th colspan="3">V<hr style = "border-color:#D0D0D0; border-width: 1px;"></th>
+  </tr>
+  <tr>
+    <td>x</td>
+	<td><input type="number" id ="Vx" style="font-size:25px"></td>
+  </tr>
+  <tr>
+    <td>y</td>
+	<td><input type="number" id ="Vy" style="font-size:25px"></td>
+  </tr>
+  <tr>
+    <td>z</td>
+	<td><input type="number" id ="Vz" style="font-size:25px"></td>
+  </tr>
+</table>
+
+<table style = "border-color:#D0D0D0;border-width: 2px;position : absolute; left:10%; top: 50%; width:30%; height:25%; background-color:#FFFFB9">
+  <tr>
+    <th colspan="3">W<hr style = "border-color:#D0D0D0; border-width: 1px;"></th>
+  </tr>
+  <tr>
+    <td>x</td>
+	<td><input type="number" id ="Wx" style="font-size:25px"></td>
+  </tr>
+  <tr>
+    <td>y</td>
+	<td><input type="number" id ="Wy" style="font-size:25px"></td>
+  </tr>
+  <tr>
+    <td>z</td>
+	<td><input type="number" id ="Wz" style="font-size:25px"></td>
+  </tr>
+</table>
+
+<table style = "border-color:#D0D0D0;border-width: 2px;position : absolute; left:52%; top: 15%; width:40%; height:60%; background-color:#FFFFB9">
+  <tr>
+    <th colspan="3">inner product<hr style = "border-color:#D0D0D0;border-width: 1px;"></th>
+  </tr>
+  <tr>
+    <td>v&#8901;w</td>
+	<td colspan="1" id = "output" style = "height:30px; font-size:15px"><h1 id="ip"></h1></td>
+  </tr>
+  <tr>
+    <th colspan="3">v&Cross;w(Vector product)<hr style = "border-color:#D0D0D0;border-width: 1px;"></th>
+  </tr>
+  <tr>
+    <td>x</td>
+	<td colspan="2" id = "output" style = "height:30px; font-size:15px"><h1 id="crossx"></h1></td>
+  </tr>
+  <tr>
+    <td>y</td>
+	<td colspan="2" id = "output" style = "height:30px; font-size:15px"><h1 id="crossy"></h1></td>
+  </tr>
+  <tr>
+    <td>z</td>
+	<td colspan="2" id = "output" style = "height:30px; font-size:15px"><h1 id="crossz"></h1></td>
+  </tr>
+</table>
+
+</div>
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+<script>
+
+animate();
+
+var vx,vy,vz,wx,wy,wz;
+function animate() {
+  var VV = new THREE.Vector3();
+  var VW = new THREE.Vector3();
+   
+  vx = document.getElementById("Vx").value;
+  vy = document.getElementById("Vy").value;
+  vz = document.getElementById("Vz").value;
+  
+  wx = document.getElementById("Wx").value;
+  wy = document.getElementById("Wy").value;
+  wz = document.getElementById("Wz").value;
+  if(vx != 0 ||vy != 0 ||vz != 0 ||wx != 0 ||wy != 0 ||wz != 0){
+  VV.x=vx;
+  VV.y=vy;
+  VV.z=vz;
+  VW.x=wx;
+  VW.y=wy;
+  VW.z=wz;
+  document.getElementById("ip").innerHTML = VV.clone().dot(VW);
+  document.getElementById("crossx").innerHTML = VV.clone().cross(VW).x;
+  document.getElementById("crossy").innerHTML = VV.clone().cross(VW).y;
+  document.getElementById("crossz").innerHTML = VV.clone().cross(VW).z;
+}
+
+  //console.log(vx);
+
+  requestAnimationFrame(animate);
+}	
+</script>
+</body>
+</html>
